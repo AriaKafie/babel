@@ -1,2 +1,0 @@
-all:
-	g++ babel.cpp feistel.cpp -o babel -lgmpxx -lgmp -lcrypto
