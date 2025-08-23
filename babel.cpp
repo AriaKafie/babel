@@ -146,16 +146,14 @@ int main()
             random_match = alphabet[rand() % alphabet.size()] + random_match + alphabet[rand() % alphabet.size()];
         }
         
-        mpz_class exact_de_alphabetized  = de_alphabetize(exact_match);
-        mpz_class random_de_alphabetized = de_alphabetize(random_match);
-        mpz_class exact_page_num         = invert(exact_de_alphabetized) + 1;
-        mpz_class random_page_num        = invert(random_de_alphabetized) + 1;
+        mpz_class exact_page_num  = invert(de_alphabetize(exact_match)) + 1;
+        mpz_class random_page_num = invert(de_alphabetize(random_match)) + 1;
 
         std::cout << "\nRandom match found on page " << random_page_num << ":\n\n"
-                  << to_formatted_page(alphabetize(random_de_alphabetized)) << std::endl;
+                  << to_formatted_page(alphabetize(permute(random_page_num - 1))) << std::endl;
         
         std::cout << "Exact match found on page " << exact_page_num << ":\n\n"
-                  << to_formatted_page(alphabetize(exact_de_alphabetized)) << std::endl;
+                  << to_formatted_page(alphabetize(permute(exact_page_num - 1))) << std::endl;
 
         browse(exact_page_num);
     }
