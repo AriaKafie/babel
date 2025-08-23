@@ -134,18 +134,18 @@ int main()
 
         text = text.substr(0, len);
         
-        std::stringstream exact;
-        exact << std::left << std::setw(len) << text;
-        std::string exact_match = exact.str();
+        std::stringstream ss;
+        ss << std::left << std::setw(len) << text;
+        std::string exact_match = ss.str();
 
         std::string random_match;
 
-        for (int i = 0; i < len; i++)
-            random_match += alphabet[rand() % alphabet.size()];
-
-        for (int i = (len - text.size()) / 2, j = 0; j < text.size(); i++, j++)
-            random_match[i] = text[j];
-
+        for (random_match = text.size() % 2 == len % 2 ? text : text + alphabet[rand() % alphabet.size()];
+             random_match.size() < len;)
+        {
+            random_match = alphabet[rand() % alphabet.size()] + random_match + alphabet[rand() % alphabet.size()];
+        }
+        
         mpz_class exact_de_alphabetized  = de_alphabetize(exact_match);
         mpz_class random_de_alphabetized = de_alphabetize(random_match);
         mpz_class exact_page_num         = invert(exact_de_alphabetized) + 1;
