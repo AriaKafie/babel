@@ -113,7 +113,7 @@ mpz_class permute(const mpz_class& x) const {
     std::vector<uint32_t> T(HALF), Fout(HALF);
 
     for (size_t r = 0; r < rounds; ++r) {
-        F(R, r, Fout);                     // SHA-256 based stream → digits mod N
+        F(R, r, Fout);                     
         for (size_t i = 0; i < HALF; ++i) {
             uint32_t t = L[i] + Fout[i];
             if (t >= N) t -= N;
